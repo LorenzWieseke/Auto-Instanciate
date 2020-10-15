@@ -12,11 +12,18 @@ def select_object(obj):
     C.view_layer.objects.active = obj
     obj.select_set(True)
 
+def getChildren(obj): 
+    children = [] 
+    for ob in bpy.data.objects: 
+        if ob.parent == obj: 
+            children.append(ob) 
+    return children 
+
 def makeLinks():
     bpy.ops.object.origin_set(type='ORIGIN_GEOMETRY', center='MEDIAN')
     bpy.ops.object.make_links_data(type='OBDATA')
   
-  
+
 def selectSimilarObjects(activeObject, objectsToIterate, doInstanciate):
     threshold = bpy.context.scene.dimension_threshold
 

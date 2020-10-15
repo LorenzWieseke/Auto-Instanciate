@@ -18,9 +18,9 @@ bl_info = {
     "description": "This addon helps you cleaning up your scene by finding former instances and make them instances again.",
     "blender": (2, 90, 0),
     "version": (0,0,1),
-    "location": "View3D -> Property Panel -> My Tools",   
+    "location": "View3D -> Property Panel -> Sceene Tools",   
     "warning": "",
-    "category": "Object"
+    "category": "Scene"
 }
 
 from . import auto_load
