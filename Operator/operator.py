@@ -61,30 +61,11 @@ class EmptyToCollection(bpy.types.Operator):
         
         selection = bpy.context.selected_objects
         for obj in selection:
-            
-            # add collection
-            col_name = obj.name
 
-            if D.collections.get(col_name) is None:
-                D.collections.new(col_name)
-            
-            new_col = D.collections.get(col_name)
-            
-            # link collection to scene
-            if new_col.name not in context.scene.collection.children:
-                context.scene.collection.children.link(new_col)
-
-            # select all children
-            children = functions.getChildren(obj)           
-
-            # add to new colleciton
-            for child in children:
-                if child not in list(new_col.all_objects):
-                    new_col.objects.link(child)
-            
-            # add parent to collection
-            new_col.objects.link(obj)
-            
+            bpy.context.view_layer.objects.active = obj
+            bpy.ops.object.select_grouped(extend=True, type='CHILDREN_RECURSIVE')
+            bpy.ops.object.move_to_collection(collection_index=0,is_new=True, new_collection_name=obj.name)
+            bpy.ops.object.select_all(action='DESELECT')
 
         return {"FINISHED"}
 
